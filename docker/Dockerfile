@@ -12,6 +12,7 @@ RUN apt-get update && \
       openjdk-11-jdk \
       build-essential \
       software-properties-common \
+      postgresql postgresql-contrib \
       ssh && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

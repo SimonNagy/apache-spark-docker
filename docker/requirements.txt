@@ -4,3 +4,5 @@ pyarrow
 numpy
 pyspark
 notebook
+psycopg2
+config
