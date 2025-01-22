@@ -26,7 +26,7 @@ RUN curl https://dlcdn.apache.org/spark/spark-3.5.4/spark-3.5.4-bin-hadoop3.tgz 
  && tar xvzf spark-3.5.4-bin-hadoop3.tgz --directory /opt/spark --strip-components 1 \
  && rm -rf sspark-3.5.4-bin-hadoop3.tgz
 
-COPY requirements/requirements.txt .
+COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 # setting env variables
@@ -37,13 +37,13 @@ ENV SPARK_MASTER_HOST spark-master
 ENV SPARK_MASTER_PORT 7077
 ENV PYSPARK_PYTHON python3
 
-COPY conf/spark-defaults.conf "${SPARK_HOME}/conf/"
+# COPY conf/spark-defaults.conf "${SPARK_HOME}/conf/"
 
 RUN chmod u+x /opt/spark/sbin/* && \
     chmod u+x /opt/spark/bin/*
 
 ENV PYTHONPATH=$SPARK_HOME/python/:$PYTHONPATH
 
-COPY /entry/entrypoint.sh .
+COPY ./entrypoint.sh /etc/entrypoint.sh
 
-ENTRYPOINT [ "/entry/entrypoint.sh" ]
+ENTRYPOINT [ "/etc/entrypoint.sh" ]

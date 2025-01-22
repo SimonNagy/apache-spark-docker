@@ -3,9 +3,9 @@ version: '3.8'
 services:
   spark-master:
     container_name: da-spark-master
-    build: .
-    image: spark
-    entrypoint: ['/entry/entrypoint.sh', 'master']
+    # build: .
+    image: spark-local
+    entrypoint: ['/etc/entrypoint.sh', 'master']
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080" ]
       interval: 5s
@@ -24,8 +24,8 @@ services:
 
   spark-history-server:
     container_name: da-spark-history
-    image: spark
-    entrypoint: ['/entry/entrypoint.sh', 'history']
+    image: spark-local
+    entrypoint: ['/etc/entrypoint.sh', 'history']
     depends_on:
       - spark-master
     env_file:
@@ -36,9 +36,9 @@ services:
       - '18080:18080'
 
   spark-worker:
-#    container_name: da-spark-worker
-    image: spark
-    entrypoint: ['/entry/entrypoint.sh', 'worker']
+    container_name: da-spark-worker
+    image: spark-local
+    entrypoint: ['/etc/entrypoint.sh', 'worker']
     depends_on:
       - spark-master
     env_file:
