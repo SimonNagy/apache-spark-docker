@@ -4,6 +4,7 @@ SPARK_WORKLOAD=$1
 
 echo "SPARK_WORKLOAD: $SPARK_WORKLOAD"
 
+# adding pathways to find services worker/master
 if [ "$SPARK_WORKLOAD" == "master" ];
 then
   start-master.sh -p 7077
